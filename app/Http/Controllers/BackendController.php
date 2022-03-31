@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Interfaces\BackendInterface;
+use App\Http\Middleware\BackendSecurity;
 use Illuminate\Http\Request;
 
 class BackendController extends Controller implements BackendInterface {
+
+    public function __construct()
+    {
+        $this->middleware(BackendSecurity::class);
+    }
 
     public function getList() {
         dd('get list');
@@ -29,4 +35,5 @@ class BackendController extends Controller implements BackendInterface {
     {
         // TODO: Implement deleteItem() method.
     }
+
 }

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\FrontendSecurity;
+
 class FrontendController extends Controller {
 
-    public function getList() {
-        dd('get list');
+    public function __construct()
+    {
+        $this->middleware(FrontendSecurity::class);
     }
 
-    public function getOne() {
-        dd('get one');
-    }
+
 }
