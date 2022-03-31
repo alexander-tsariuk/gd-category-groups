@@ -14,11 +14,25 @@ class BackendController extends Controller implements BackendInterface {
     }
 
     public function getList() {
-        dd('get list');
+        return [
+            [
+                'id' => 1,
+                'name' => 'First Test Category Group'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Second Test Category Group'
+            ],
+        ];
     }
 
     public function getOne() {
-        dd('get one');
+        return [
+            [
+                'id' => 1,
+                'name' => 'First Test Category Group'
+            ],
+        ];
     }
 
     public function createItem(Request $request)
