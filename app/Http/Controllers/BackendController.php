@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Interfaces\BackendInterface;
 use App\Http\Middleware\BackendSecurity;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class BackendController extends Controller implements BackendInterface {
 
