@@ -26,13 +26,13 @@ class BackendController extends Controller implements BackendInterface {
         ];
     }
 
-    public function getOne() {
-        return [
-            [
-                'id' => 1,
+    public function getOne(int $id) {
+        return response()->json([
+            'item' => [
+                'id' => $id,
                 'name' => 'First Test Category Group'
-            ],
-        ];
+            ]
+        ]);
     }
 
     public function createItem(Request $request)

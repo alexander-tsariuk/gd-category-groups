@@ -8,7 +8,7 @@ interface BackendInterface {
 
     public function getList();
 
-    public function getOne();
+    public function getOne(int $id);
 
     public function createItem(Request $request);
 

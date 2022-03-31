@@ -15,11 +15,15 @@ class BackendSecurity {
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!$request->hasHeader('site_key') || !$request->hasHeader('site_id') || !$request->hasHeader('user_id')) {
-            return response()->json([
-                'message' => "Unauthorized request"
-            ], 401);
-        }
+//        if(
+//            !$request->hasHeader('site_key') ||
+//            !$request->hasHeader('site_id') ||
+//            !$request->hasHeader('user_id')
+//        ) {
+//            return response()->json([
+//                'message' => "Unauthorized request"
+//            ], 401);
+//        }
 
         return $next($request);
     }
