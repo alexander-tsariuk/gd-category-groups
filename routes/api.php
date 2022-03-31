@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group('backend', function () {
+Route::group(['prefix' => 'backend'], function () {
     Route::get('getList', [\App\Http\Controllers\BackendController::class, 'getList']);
     Route::get('getOne', [\App\Http\Controllers\BackendController::class, 'getOne']);
     Route::post('create', [\App\Http\Controllers\BackendController::class, 'createItem']);
@@ -22,6 +22,6 @@ Route::group('backend', function () {
     Route::delete('delete/{id}', [\App\Http\Controllers\BackendController::class, 'deleteItem']);
 });
 
-Route::group('frontend', function (){
+Route::group(['prefix' => 'frontend'], function (){
     //...
 });
