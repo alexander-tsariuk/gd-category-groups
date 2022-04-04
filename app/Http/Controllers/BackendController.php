@@ -17,7 +17,7 @@ class BackendController extends Controller implements BackendInterface {
         $this->middleware(BackendSecurity::class);
     }
 
-    public function getList() {
+    public function getList(): \Illuminate\Http\JsonResponse{
         try {
             $perPage = 10;
 
