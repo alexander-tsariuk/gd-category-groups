@@ -87,6 +87,10 @@ class BackendController extends Controller implements BackendInterface {
                 'created_by' => $request->header('user-id'),
                 'site_id' => $request->header('site-id')
             ]);
+            // для тестирования, чтобы не забивать БД
+            if($request->has('id') && !empty($request->get('id')) && is_int($request->get('id'))) {
+                $entity->id = $request->get('id');
+            }
 
             if(!$entity->save()) {
                 throw new \Exception("An error occurs while creating category groups!");

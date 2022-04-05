@@ -8,6 +8,7 @@ class CategoryGroupModel extends Model {
     protected $table = 'category_groups';
 
     protected $fillable = [
+        'id',
         'name',
         'seo_name',
         'status',
