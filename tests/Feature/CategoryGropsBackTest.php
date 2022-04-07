@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Testing\Fluent\AssertableJson;
+use Osteel\OpenApi\Testing\ValidatorBuilder;
 use Tests\TestCase;
 
 class CategoryGropsBackTest extends TestCase
@@ -33,6 +34,7 @@ class CategoryGropsBackTest extends TestCase
                     ->whereType('data', 'array')
                     ->etc()
             );
+
     }
 
     /**
