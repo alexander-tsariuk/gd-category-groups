@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +13,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'backend'], function () {
-    Route::get('getList', [\App\Http\Controllers\BackendController::class, 'getList']);
-    Route::get('getOne/{id}', [\App\Http\Controllers\BackendController::class, 'getOne']);
-    Route::post('create', [\App\Http\Controllers\BackendController::class, 'createItem']);
-    Route::put('update/{id}', [\App\Http\Controllers\BackendController::class, 'updateItem']);
-    Route::delete('delete/{id}', [\App\Http\Controllers\BackendController::class, 'deleteItem']);
+Route::group(['prefix' => 'v1'], function () {
+    Route::group(['prefix' => 'categories'], function () {
+
+        Route::group(['prefix' => 'groups'], function () {
+            Route::group(['prefix' => 'backend'], function () {
+                Route::get('getList', [\App\Http\Controllers\Groups\BackendController::class, 'getList']);
+                Route::get('getOne/{id}', [\App\Http\Controllers\Groups\BackendController::class, 'getOne']);
+                Route::post('create', [\App\Http\Controllers\Groups\BackendController::class, 'createItem']);
+                Route::put('update/{id}', [\App\Http\Controllers\Groups\BackendController::class, 'updateItem']);
+                Route::delete('delete/{id}', [\App\Http\Controllers\Groups\BackendController::class, 'deleteItem']);
+            });
+
+            Route::group(['prefix' => 'frontend'], function () {
+                //...
+            });
+        });
+
+
+        Route::group(['prefix' => 'items'], function () {
+            Route::group(['prefix' => 'backend'], function () {
+
+                Route::get('getList', [\App\Http\Controllers\Items\BackendController::class, 'getList']);
+                Route::get('getOne/{id}', [\App\Http\Controllers\Items\BackendController::class, 'getOne']);
+                Route::post('create', [\App\Http\Controllers\Items\BackendController::class, 'createItem']);
+                Route::put('update/{id}', [\App\Http\Controllers\Items\BackendController::class, 'updateItem']);
+                Route::delete('delete/{id}', [\App\Http\Controllers\Items\BackendController::class, 'deleteItem']);
+            });
+
+            Route::group(['prefix' => 'frontend'], function () {
+                //...
+            });
+        });
+
+
+    });
 });
 
-Route::group(['prefix' => 'frontend'], function (){
-    //...
-});
