@@ -26,7 +26,7 @@ Route::group(['prefix' => 'v1'], function () {
             });
 
             Route::group(['prefix' => 'frontend'], function () {
-                //...
+                Route::get('getMenu', [\App\Http\Controllers\Groups\FrontendController::class, 'getMenu']);
             });
         });
 
@@ -42,7 +42,7 @@ Route::group(['prefix' => 'v1'], function () {
             });
 
             Route::group(['prefix' => 'frontend'], function () {
-                //...
+                Route::get('getOne/{id}', [\App\Http\Controllers\Items\FrontendController::class, 'getOne']);
             });
         });
 

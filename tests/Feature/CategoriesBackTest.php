@@ -6,19 +6,25 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Testing\Fluent\AssertableJson;
-use Osteel\OpenApi\Testing\ValidatorBuilder;
 use Tests\TestCase;
 
-class CategoryGropsBackTest extends TestCase
+class CategoriesBackTest extends TestCase
 {
     /**
      * Создание группы категорий: Успешно
      * @return void
      */
     public function test_backend_create_success() {
-        $response = $this->json('POST', '/api/backend/create', [
-            'name' => 'Testing The Test Category Group',
-            'seo_name' => 'testing-the-test-category-group',
+        $response = $this->json('POST', '/api/v1/categories/items/backend/create', [
+            'name' => 'Test Category',
+            'seo_name' => 'test-category',
+            'anchor_title' => 'The test anchor',
+            'title' => 'Title',
+            'h1' => 'H1',
+            'description' => 'Description',
+            'annotation' => 'Annotation',
+            'group_id' => 1,
+            'show_in_menu' => 1,
             'status' => 1,
             'id' => 99999
         ], [
@@ -42,8 +48,8 @@ class CategoryGropsBackTest extends TestCase
      * @return void
      */
     public function test_backend_create_validationError_seoName() {
-        $response = $this->json('POST', '/api/backend/create', [
-            'seo_name' => 'testing-the-test-category-group',
+        $response = $this->json('POST', '/api/v1/categories/items/backend/create', [
+            'seo_name' => 'test-category',
         ], [
             'site-id' => 999,
             'site-key' => 'site_key',
@@ -65,7 +71,7 @@ class CategoryGropsBackTest extends TestCase
      * @return void
      */
     public function test_backend_create_validationError_name() {
-        $response = $this->json('POST', '/api/backend/create', [
+        $response = $this->json('POST', '/api/v1/categories/items/backend/create', [
             'seo_name' => 'te',
         ], [
             'site-id' => 999,
@@ -88,10 +94,17 @@ class CategoryGropsBackTest extends TestCase
      * @return void
      */
     public function test_backend_update_success() {
-        $response = $this->json('PUT', '/api/backend/update/99999', [
-            'name' => 'Testing The Test Category Group Updated',
-            'seo_name' => 'testing-the-test-category-group',
-            'status' => 0,
+        $response = $this->json('PUT', '/api/v1/categories/items/backend/update/99999', [
+            'name' => 'Test Category',
+            'seo_name' => 'test-category',
+            'anchor_title' => 'The test anchor',
+            'title' => 'Title',
+            'h1' => 'H1',
+            'description' => 'Description',
+            'annotation' => 'Annotation',
+            'group_id' => 1,
+            'show_in_menu' => 1,
+            'status' => 1,
         ], [
             'site-id' => 999,
             'site-key' => 'site_key',
@@ -112,10 +125,17 @@ class CategoryGropsBackTest extends TestCase
      * @return void
      */
     public function test_backend_update_notExists() {
-        $response = $this->json('PUT', '/api/backend/update/99998', [
-            'name' => 'Testing The Test Category Group Updated',
-            'seo_name' => 'testing-the-test-category-group',
-            'status' => 0,
+        $response = $this->json('PUT', '/api/v1/categories/items/backend/update/99998', [
+            'name' => 'Test Category',
+            'seo_name' => 'test-category',
+            'anchor_title' => 'The test anchor',
+            'title' => 'Title',
+            'h1' => 'H1',
+            'description' => 'Description',
+            'annotation' => 'Annotation',
+            'group_id' => 1,
+            'show_in_menu' => 1,
+            'status' => 1,
         ], [
             'site-id' => 999,
             'site-key' => 'site_key',
@@ -137,10 +157,17 @@ class CategoryGropsBackTest extends TestCase
      * @return void
      */
     public function test_backend_update_validationError_seoName() {
-        $response = $this->json('PUT', '/api/backend/update/99999', [
-            'name' => 'Testing The Test Category Group Updated',
+        $response = $this->json('PUT', '/api/v1/categories/items/backend/update/99999', [
+            'name' => 'Test Category',
             'seo_name' => 'te',
-            'status' => 0,
+            'anchor_title' => 'The test anchor',
+            'title' => 'Title',
+            'h1' => 'H1',
+            'description' => 'Description',
+            'annotation' => 'Annotation',
+            'group_id' => 1,
+            'show_in_menu' => 1,
+            'status' => 1,
         ], [
             'site-id' => 999,
             'site-key' => 'site_key',
@@ -162,10 +189,17 @@ class CategoryGropsBackTest extends TestCase
      * @return void
      */
     public function test_backend_update_validationError_name() {
-        $response = $this->json('PUT', '/api/backend/update/99999', [
+        $response = $this->json('PUT', '/api/v1/categories/items/backend/update/99999', [
             'name' => 'Te',
-            'seo_name' => 'testing-the-test-category-group',
-            'status' => 0,
+            'seo_name' => 'test-category',
+            'anchor_title' => 'The test anchor',
+            'title' => 'Title',
+            'h1' => 'H1',
+            'description' => 'Description',
+            'annotation' => 'Annotation',
+            'group_id' => 1,
+            'show_in_menu' => 1,
+            'status' => 1,
         ], [
             'site-id' => 999,
             'site-key' => 'site_key',
@@ -187,7 +221,7 @@ class CategoryGropsBackTest extends TestCase
      * @return void
      */
     public function test_backend_getOne_success() {
-        $response = $this->json('GET', '/api/backend/getOne/99999', [], [
+        $response = $this->json('GET', '/api/v1/categories/items/backend/getOne/99999', [], [
             'site-id' => 999,
             'site-key' => 'site_key',
             'user-id' => 777
@@ -207,7 +241,7 @@ class CategoryGropsBackTest extends TestCase
      * @return void
      */
     public function test_backend_getOne_notExists() {
-        $response = $this->json('GET', '/api/backend/getOne/99998', [], [
+        $response = $this->json('GET', '/api/v1/categories/items/backend/getOne/99998', [], [
             'site-id' => 999,
             'site-key' => 'site_key',
             'user-id' => 777
@@ -229,7 +263,7 @@ class CategoryGropsBackTest extends TestCase
      */
     public function test_backend_list()
     {
-        $response = $this->json('GET', '/api/backend/getList', [], [
+        $response = $this->json('GET', '/api/v1/categories/items/backend/getList', [], [
             'site-id' => 1,
             'site-key' => 'site_key',
             'user-id' => 22
@@ -248,8 +282,8 @@ class CategoryGropsBackTest extends TestCase
      * Удаление группы категорий: Успешно
      * @return void
      */
-    public function test_backend_delete_success() {
-        $response = $this->json('DELETE', '/api/backend/delete/99999', [], [
+    public function test_backend_soft_delete_success() {
+        $response = $this->json('DELETE', '/api/v1/categories/items/backend/delete/99999?soft=true', [], [
             'site-id' => 999,
             'site-key' => 'site_key',
             'user-id' => 777
@@ -268,8 +302,8 @@ class CategoryGropsBackTest extends TestCase
      * Удаление группы категорий: Не найдено
      * @return void
      */
-    public function test_backend_delete_notExists() {
-        $response = $this->json('DELETE', '/api/backend/delete/99998', [], [
+    public function test_backend_soft_delete_notExists() {
+        $response = $this->json('DELETE', '/api/v1/categories/items/backend/delete/99998?soft=true', [], [
             'site-id' => 999,
             'site-key' => 'site_key',
             'user-id' => 777
@@ -281,6 +315,27 @@ class CategoryGropsBackTest extends TestCase
                 ->where('code', 422)
                 ->where('message', 'Validation Errors!')
                 ->whereType('errors', 'array')
+                ->etc()
+            );
+    }
+
+
+    /**
+     * Удаление группы категорий: Успешно
+     * @return void
+     */
+    public function test_backend_delete_success() {
+        $response = $this->json('DELETE', '/api/v1/categories/items/backend/delete/99999', [], [
+            'site-id' => 999,
+            'site-key' => 'site_key',
+            'user-id' => 777
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJson(fn (AssertableJson $json) =>
+            $json->where('success', true)
+                ->where('code', 200)
+                ->whereType('data', 'array')
                 ->etc()
             );
     }

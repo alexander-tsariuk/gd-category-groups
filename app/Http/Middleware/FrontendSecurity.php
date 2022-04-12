@@ -15,7 +15,7 @@ class FrontendSecurity {
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!$request->hasHeader('site_key') || !$request->hasHeader('site_id')) {
+        if(!$request->hasHeader('site-key') || !$request->hasHeader('site-id')) {
             return response()->json([
                 'message' => "Unauthorized request"
             ], 401);

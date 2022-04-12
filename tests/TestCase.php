@@ -3,10 +3,8 @@
 namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use RonasIT\Support\AutoDoc\Tests\AutoDocTestCase;
 
-abstract class TestCase extends AutoDocTestCase
+abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
-//    use AutoDocTestCaseTrait;
 }
